@@ -1,5 +1,5 @@
 {
-    "name": "hrishikesh214/phpapi",
+    "name": "hrishikesh214/php-api",
     "description": "Helps easily build RESTApi in php",
     "type": "library",
     "require": {}
