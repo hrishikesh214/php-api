@@ -15,10 +15,11 @@ $api->mount("GET", 'token', function(){
 $api->mount("POST", 'api/token', function(){
     return json_encode(["token" => md5(rand(100,1000))], JSON_PRETTY_PRINT);
 });
-
-$api->mount('delete', 'api/wish/:name', function (){
-    return $_POST;
-});
+$gg = function($props){
+    extract($props);
+    return "gg $name";
+};
+$api->mount('get', 'api/wish/:name', $gg);
 
 $api->trace();
 
@@ -28,3 +29,4 @@ print_r($api->run(isset($_GET['URL']) ? $_GET['URL'] : ""));
 function wish($props){
     return "Hello ". $props['fname'] ." ". $props['lname'] . ", how are you?";
 }
+

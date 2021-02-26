@@ -1,5 +1,16 @@
-# `PHP` API
+# [`PHP` API](https://github.com/hrishikesh214/php-api)
 ## ```Easily create RESTFull API in PHP```
+# Configurations
+Before getting into `PHPAPI` we have to make some configs
+
+In your root directory, create `.htaccess` file and paste following code
+```apacheconf
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?URL=$1 [L]
+```
+
 # Documentation
 ### `Creating a client`
 ```php
@@ -11,6 +22,11 @@ $client = new phpapi\Client("api/");
 ```
 All child endpoints will be access after `api/`
 
+## `Running Client`
+```php
+$client->run(isset($_GET['URL']) ? $_GET['URL'] : "");
+```
+
 ### `Creating an Endpoint`
 ```php
 $client->mount('GET', 'token', function(){
@@ -20,11 +36,11 @@ $client->mount('GET', 'token', function(){
 ```
 Only some request methods are allowed : `'PUT', 'POST', 'DELETE', 'PATCH', 'GET', 'PURGE'`
 
-`mount` return boolean value about whether endpoint is mounted successful or not
+`mount` returns boolean value about whether endpoint is mounted successfully or not
 
 ### `Passing URL Parameters`
 
-Use `Client` will automatically pass url parameters to the response function
+`Client` will automatically pass url parameters to the response function
 
 example is given below
 ```php
@@ -113,3 +129,5 @@ $client->set405([
 ]);
 ```
 
+
+### Made with ❤️By [Hrishikesh](https://github.com/hrishikesh214)
