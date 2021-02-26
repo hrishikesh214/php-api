@@ -1,5 +1,20 @@
 # [`PHP` API](https://github.com/hrishikesh214/php-api)
 ## ```Easily create RESTFull API in PHP```
+
+# Installation
+You can install it from [Github](https://github.com/hrishikesh214/php-api) or from composer too.
+```apacheconf
+composer require hrishikesh214/php-api
+```
+And then
+```php
+require 'vendor/hrishikesh214/php-api/autoload.php';
+```
+or if installed using from Github
+```php
+require 'php-api/autoload.php';
+```
+
 # Configurations
 Before getting into `PHPAPI` we have to make some configs
 
@@ -24,8 +39,10 @@ All child endpoints will be access after `api/`
 
 ## `Running Client`
 ```php
-$client->run(isset($_GET['URL']) ? $_GET['URL'] : "");
+print_r($client->run(isset($_GET['URL']) ? $_GET['URL'] : ""));
 ```
+
+This `$client->run()` returns response string, so you can store it in variable or directly print it
 
 ### `Creating an Endpoint`
 ```php
