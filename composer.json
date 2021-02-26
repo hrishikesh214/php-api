@@ -3,5 +3,5 @@
     "description": "Helps easily build RESTApi in php",
     "type": "library",
     "require": {},
-    "license": "GPL-3.0-only / GPL-3.0-or-later"
+    "license": "GPL-3.0-or-later"
 }
