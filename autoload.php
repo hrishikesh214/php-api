@@ -1,3 +1,3 @@
 <?php
 
-require __dir__.'/src/main.php'; 
+require __dir__.'/src/Client.php';
