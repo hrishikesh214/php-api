@@ -8,7 +8,7 @@ composer require hrishikesh214/php-api
 ```
 And then
 ```php
-require 'vendor/hrishikesh214/php-api/autoload.php';
+require 'vendor/autoload.php';
 ```
 or if installed using from Github
 ```php
