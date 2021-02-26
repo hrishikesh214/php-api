@@ -1,7 +1,7 @@
 <?php
 
-require __dir__.'/../autoload.php';
-//require 'vendor/autoload.php';
+//require __dir__.'/../autoload.php';
+require 'vendor/autoload.php';
 $api = new PHPAPI\Client();
 
 $api->mount("get", 'api/name/:fname/:lname', function($props){

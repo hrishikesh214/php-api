@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPAPI;
+namespace phpapi;
 
 class Client{
 

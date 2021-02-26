@@ -1,5 +1,5 @@
 {
     "require": {
-        "hrishikesh214/php-api": "^1.4"
+        "hrishikesh214/php-api": "dev-main"
     }
 }
