@@ -2,5 +2,6 @@
     "name": "hrishikesh214/php-api",
     "description": "Helps easily build RESTApi in php",
     "type": "library",
-    "require": {}
+    "require": {},
+    "license": "GPL-3.0-only / GPL-3.0-or-later"
 }
