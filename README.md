@@ -70,6 +70,15 @@ URI Parameters are directly passed to the responder function in an associative a
 All other `posted` parameters will automatically get stored in `$_POST`
 
 `NOTE` If parameter is define while mounting but not passes then it is given a null value 
+
+### `POST Endpoint`
+```php
+$respond = function(){
+    return $_POST; //It will have all posted data!
+};
+$client->mount("POST", 'checkpost', $respond);
+```
+
 ### Trace Whole API
 You can trace whole API Client with detailed configs of all endpoints mounted with a function
 ```php
