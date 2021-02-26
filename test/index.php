@@ -20,7 +20,7 @@ $api->mount('delete', 'api/wish/:name', function (){
     return $_POST;
 });
 
-$api->trace(false);
+$api->trace();
 
 print_r($api->run(isset($_GET['URL']) ? $_GET['URL'] : ""));
 
