@@ -134,6 +134,7 @@ class Client{
                 foreach($this->_supported_methods as $supported_type){
                     if( array_key_exists($temp, $this->_routes[$supported_type]) ){
                         $this->triggered[] = 405;
+                        break;
                     }
                 }
             }
@@ -145,19 +146,14 @@ class Client{
         }
         if( $route != null ){
             $_POST = json_decode(file_get_contents('php://input'), true);
-            if($route['type'] == $_SERVER['REQUEST_METHOD']){
-                if(empty($route['params'])){
-                    $this->_result['result'] = $route['responder']();
-                }
-                else{
-                    $this->_result['result'] = $route['responder']($route['params']);
-                }
+            if(empty($route['params'])){
+                $this->_result['result'] = $route['responder']();
             }
-            else{
-                array_push($this->triggered, 405);
+            else {
+                $this->_result['result'] = $route['responder']($route['params']);
             }
         }
-        else{
+        else if(empty($this->triggered)){
             array_push($this->triggered, 404);
         }
         if(!empty($this->triggered)){

@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hrishikesh214/php-api.git",
-                "reference": "b1c9fa9a6365b837d4df0576dcd2908aaafd24b5"
+                "reference": "f9c0498b19a813346fb2dc8d9fb3e52d28f5ad8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hrishikesh214/php-api/zipball/b1c9fa9a6365b837d4df0576dcd2908aaafd24b5",
-                "reference": "b1c9fa9a6365b837d4df0576dcd2908aaafd24b5",
+                "url": "https://api.github.com/repos/hrishikesh214/php-api/zipball/f9c0498b19a813346fb2dc8d9fb3e52d28f5ad8c",
+                "reference": "f9c0498b19a813346fb2dc8d9fb3e52d28f5ad8c",
                 "shasum": ""
             },
             "default-branch": true,
@@ -34,9 +34,9 @@
             "description": "Helps easily build RESTApi in php",
             "support": {
                 "issues": "https://github.com/hrishikesh214/php-api/issues",
-                "source": "https://github.com/hrishikesh214/php-api/tree/v1.5"
+                "source": "https://github.com/hrishikesh214/php-api/tree/main"
             },
-            "time": "2021-02-26T17:50:23+00:00"
+            "time": "2021-02-27T16:25:41+00:00"
         }
     ],
     "packages-dev": [],
