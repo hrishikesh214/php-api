@@ -1,18 +1,18 @@
 # [`PHP` API](https://github.com/hrishikesh214/php-api)
-## ```Easily create RESTFull API in PHP```
+### ```Easily create RESTFull API in PHP```
+###
+```css
+It supports only JSON but you can change output :-) 
+```
 
 # Installation
-You can install it from [Github](https://github.com/hrishikesh214/php-api) or from composer too.
 ```apacheconf
 composer require hrishikesh214/php-api
 ```
-And then
+
+And then in your file
 ```php
 require 'vendor/autoload.php';
-```
-or if installed using from Github
-```php
-require 'php-api/autoload.php';
 ```
 
 # Configurations
@@ -42,7 +42,7 @@ All child endpoints will be access after `api/`
 print_r($client->run(isset($_GET['URL']) ? $_GET['URL'] : ""));
 ```
 
-This `$client->run()` returns response string, so you can store it in variable or directly print it
+This `$client->run()` returns response string, so you can store it in variable for further process or directly print it as response
 
 ### `Creating an Endpoint`
 ```php
