@@ -1,6 +1,6 @@
 <?php
-
-require 'vendor/autoload.php';
+//require 'vendor/autoload.php';
+require '../autoload.php';
 
 $api = new phpapi\Client();
 
@@ -9,6 +9,10 @@ $api->mount("get", 'api/name/:fname/:lname', function($props){
 });
 
 $api->mount("GET", 'token', function(){
+    return md5(rand(100,1000));
+});
+
+$api->mount("POST", 'token', function(){
     return md5(rand(100,1000));
 });
 

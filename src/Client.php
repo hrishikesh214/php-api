@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace phpapi;
 
@@ -7,7 +7,14 @@ class Client{
     protected String $_base = "";
     protected array $_headers = [];
     protected array $_result = [];
-    protected array $_routes = [];
+    protected array $_routes = [
+        'PUT' => [],
+        'POST' => [],
+        'DELETE' => [],
+        'PATCH' => [],
+        'GET' => [],
+        'PURGE' => []
+    ];
     protected array $_raw_routes = [];
     protected array $_request_blocks = [];
     protected bool $isTrace = false;
@@ -26,6 +33,7 @@ class Client{
 	    $this->set405([
 	        'error' => '405 '.$_SERVER['REQUEST_METHOD'].' REQUEST NOT ALLOWED'
         ]);
+	    $this->_raw_routes = $this->_routes;
 	}
 
 	public function setBasePath($base){
@@ -65,15 +73,15 @@ class Client{
         if($path[0] == '/'){
             $path = substr($path, 1);
         }
-		if( !array_key_exists( $this->_base . $path, $this->_routes)){
-            $this->_routes[$this->_base . $path] = [
-                "base" => $path ,
+		if( !array_key_exists( $this->_base . $path, $this->_routes[$type])){
+            $this->_routes[$type][$this->_base . $path] = [
+                "base" => $this->_base . $path ,
                 "type" => $type ,
                 "params" => $params,
                 "responder" => $responder
             ];
-            $this->_raw_routes[$path] = [
-                "base" => $path ,
+            $this->_raw_routes[$type][$this->_base . $path] = [
+                "base" => $this->_base . $path ,
                 "type" => $type ,
                 "params" => $params,
             ];
@@ -90,7 +98,7 @@ class Client{
 
 	public function getTrace(){
 	    return  [
-	        'routes' => $this->_raw_routes,
+	        'routes' => array_filter($this->_raw_routes),
             'base' => $this->_base,
             'request_blocks' => $this->_request_blocks,
             'request_uri' => implode('/', $this->_request_blocks),
@@ -100,7 +108,7 @@ class Client{
 
 	public function run($request){
         header('Content-Type: application/json');
-
+        $type = $_SERVER['REQUEST_METHOD'];
         $blocks = explode('/', $request);
         if($blocks[sizeof($blocks) - 1] == NULL ){
             unset($blocks[sizeof($blocks) -1 ]) ;
@@ -110,8 +118,8 @@ class Client{
         for($counter = 1;$counter<=sizeof($blocks);$counter++){
             $temp = array_slice($blocks, 0, $counter);
             $temp = implode('/', $temp);
-            if( !$found  && array_key_exists($temp, $this->_routes ) ){
-                $route = $this->_routes[$temp];
+            if( !$found  && array_key_exists($temp, $this->_routes[$type]) ){
+                $route = $this->_routes[$type][$temp];
                 $found = true;
             }
             else if($found){
@@ -121,6 +129,13 @@ class Client{
                     $counter++;
                 }
                 break;
+            }
+            else if(!$found && !array_key_exists($temp, $this->_routes[$type])){
+                foreach($this->_supported_methods as $supported_type){
+                    if( array_key_exists($temp, $this->_routes[$supported_type]) ){
+                        $this->triggered[] = 405;
+                    }
+                }
             }
         }
 
