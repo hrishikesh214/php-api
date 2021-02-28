@@ -7,14 +7,14 @@ It supports only JSON but you can change output :-)
 
 # Index
 
-1. [Installation](#Installation)
-2. [Documentation](#Documentation)
-3. [Creating Endpoint](#Creating an Endpoint)
-4. [Passing URL Parameters](#Passing URL Parameters)
-5. [Post Parameters](#POST Endpoint)
-6. [API Tracer](#Setting Request Errors)
-7. [Setting Error Handlers](#Setting Request Errors)
-8. [External Routes](#External Routes)
+1. [Installation](#installation)
+2. [Documentation](#documentation)
+3. [Creating Endpoint](#creating-an-endpoint)
+4. [Passing URL Parameters](#passing-url-Parameters)
+5. [Post Parameters](#pOST-endpoint)
+6. [API Tracer](#trace-whole-api)
+7. [Setting Error Handlers](#setting-request-errors)
+8. [External Routes](#external-routes)
 
 # Installation
 ```apacheconf
