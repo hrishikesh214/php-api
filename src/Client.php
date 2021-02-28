@@ -55,23 +55,28 @@ class Client{
         if( !in_array($type, $this->_supported_methods)){
             return false;
         }
-        $segments = explode('/', $path);
+        $segments = ($path == '/') ? "" : explode('/', $path);
         $path = [];
         $params = [];
         $indexer = 3;
-        foreach($segments as $segment){
-            if($segment[0] == ':'){
-                $params[substr($segment, 1)] = $indexer;
-                $indexer++;
-            }
-            else {
-                $path[] = $segment;
+        if(is_array($segments)){
+            foreach($segments as $segment){
+                if($segment == '/'){ $segment = ''; }
+                if($segment[0] == ':'){
+                    $params[substr($segment, 1)] = $indexer;
+                    $indexer++;
+                }
+                else {
+                    $path[] = $segment;
+                }
             }
         }
-        $path = implode('/', $path);
-        $fullpath = implode('/', $segments);
-        if($path[0] == '/'){
+        $path = (empty($path)) ? "" : implode('/', $path);
+        if(isset($path[0]) && $path[0] == '/'){
             $path = substr($path, 1);
+        }
+        else if($path == ''){
+            $path = '/';
         }
 		if( !array_key_exists( $this->_base . $path, $this->_routes[$type])){
             $this->_routes[$type][$this->_base . $path] = [
@@ -108,6 +113,7 @@ class Client{
 
 	public function run($request){
         header('Content-Type: application/json');
+        $request = ($request == '') ? '/' : $request;
         $type = $_SERVER['REQUEST_METHOD'];
         $blocks = explode('/', $request);
         if($blocks[sizeof($blocks) - 1] == NULL ){
@@ -115,6 +121,9 @@ class Client{
         }
         $found = false;
         $route = null;
+        if(sizeof($blocks) == 1 && $blocks[0] == ""){
+            $blocks[0] = '/';
+        }
         for($counter = 1;$counter<=sizeof($blocks);$counter++){
             $temp = array_slice($blocks, 0, $counter);
             $temp = implode('/', $temp);
@@ -139,7 +148,6 @@ class Client{
                 }
             }
         }
-
         $this->_request_blocks = $blocks;
         if($this->isTrace){
             $this->_result['track'] = $this->getTrace();

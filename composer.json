@@ -1,6 +1,6 @@
 {
     "name": "hrishikesh214/php-api",
-    "description": "Helps easily build RESTApi in php",
+    "description": "Helps easily build RESTFul Api in PHP",
     "type": "library",
     "require": {},
     "license": "GPL-3.0-or-later",
