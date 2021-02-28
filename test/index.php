@@ -1,11 +1,12 @@
 <?php
-//require 'vendor/autoload.php';
-require '../autoload.php';
+require 'vendor/autoload.php';
+//require '../autoload.php';
 //echo "<pre>";
 $api = new phpapi\Client();
 $helper = new phpapi\Helper($api);
 
 $helper->use('routes/api.php');
+$helper->use('api2.php');
 
 $api->mount("post", "name", function(){
             return "You posted name : {$_POST['name']}";

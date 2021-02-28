@@ -91,45 +91,56 @@ _**This Also includes Requested configs**_
 Example output:- 
 ```json
 {
-    "track": {
-        "routes": {
-            "api/name": {
-                "base": "api/name",
-                "type": "GET",
-                "params": {
-                    "fname": 3,
-                    "lname": 4
-                    }
-            },
-            "token": {
-                "base": "token",
-                "type": "GET",
-                "params": [ ]
-            },
-            "api/token": {
-                "base": "api/token",
-                "type": "POST",
-                "params": [ ]
-            },
-            "api/wish": {
-                "base": "api/wish",
-                "type": "DELETE",
-                "params": {
-                    "name": 3
-                }
-            }
+  "track": {
+    "routes": {
+      "POST": {
+        "api/wish": {
+          "base": "api/wish",
+          "type": "POST",
+          "params": [ ]
         },
-        "base": "",
-        "request_blocks": [
-        "api",
-        "name",
-        "hrishi",
-        "vaze"
-        ],
-        "request_uri": "api/name/john",
-        "request_type": "GET"
+        "name": {
+          "base": "name",
+          "type": "POST",
+          "params": [ ]
+        }
+      },
+      "GET": {
+        "api/msg": {
+          "base": "api/msg",
+          "type": "GET",
+          "params": [ ]
+        },
+        "api/wish": {
+          "base": "api/wish",
+          "type": "GET",
+          "params": {
+            "name": 3
+          }
+        },
+        "name": {
+          "base": "name",
+          "type": "GET",
+          "params": {
+            "name": 3
+          }
+        },
+        "/": {
+          "base": "/",
+          "type": "GET",
+          "params": [ ]
+        }
+      }
     },
-    "result": "Hello john , how are you?"
+    "base": "",
+    "request_blocks": [
+      "api",
+      "msg"
+    ],
+    "request_uri": "api/msg",
+    "request_type": "GET"
+  },
+  "result": "trial"
 }
 ```
 
@@ -154,6 +165,62 @@ $client->set405([
     'error_msg' => "Method Not Allowed"
 ]);
 ```
+## External Routes
+### `Importing Routes from external file`
+You can also define routes in external file all you need is to use `Helper` Class.
+
+For example (folder structure):- 
+```
+|   myRoutes
+|       - api.php
+|   vendor (composer files)
+|   index.php
+```
+```php
+//index.php
+$client = new phpapi\Client();
+$helper = new phpapi\Helper($client);
+```
+```php
+// myRoutes/api.php
+
+// You can define functions and also pass to callback
+$myFunc = function($props){
+            return "Good morning {$props['name']}";
+        };
+
+$routes = [
+    [
+        "match" => 'msg',
+        "type" => "get",
+        "callback" => function(){
+            return "trial";
+        }
+    ],
+    [
+        "match" => 'wish/:name',
+        "type" => "get",
+        "callback" => $myFunc
+    ],
+    [
+        "match" => 'wish',
+        "type" => "post",
+        "callback" => function(){
+            return "Good morning {$_POST['name']}";
+        }
+    ]
+];
+
+$config = [
+    'base' => 'api'
+];
+```
+
+In above code `$config['base']'` will be act as base to all routes present in this file.
+
+`$routes` will contain all routes.
+
+*Please maintain format else code will not work!*
 
 
 ### Made with ❤️By [Hrishikesh](https://github.com/hrishikesh214)
