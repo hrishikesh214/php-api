@@ -5,6 +5,17 @@
 It supports only JSON but you can change output :-) 
 ```
 
+# Index
+
+1. [Installation](#Installation)
+2. [Documentation](#Documentation)
+3. [Creating Endpoint](#Creating an Endpoint)
+4. [Passing URL Parameters](#Passing URL Parameters)
+5. [Post Parameters](#POST Endpoint)
+6. [API Tracer](#Setting Request Errors)
+7. [Setting Error Handlers](#Setting Request Errors)
+8. [External Routes](#External Routes)
+
 # Installation
 ```apacheconf
 composer require hrishikesh214/php-api
@@ -180,6 +191,8 @@ For example (folder structure):-
 //index.php
 $client = new phpapi\Client();
 $helper = new phpapi\Helper($client);
+
+$helper->use('myRoutes/api.php' [, basename: 'api']);
 ```
 ```php
 // myRoutes/api.php
